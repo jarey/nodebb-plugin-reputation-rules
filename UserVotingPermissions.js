@@ -1,8 +1,6 @@
 'use strict';
 
-var Config = require('./Config.js');
-
-var UserVotingPermissions = function(db, user, post) {
+var UserVotingPermissions = function(Config, db, user, post) {
     var _this = this;
     this.user = user;
     this.post = post;
@@ -78,7 +76,7 @@ var UserVotingPermissions = function(db, user, post) {
 
     this.hasEnoughReputationToDownvote = function(callback) {
         var allowed = _this.user.reputation > Config.minReputationToDownvote();
-        if (!allowed) callback({'reason': 'notEnoughPosts'});
+        if (!allowed) callback({'reason': 'notEnoughReputation'});
         else callback();
     };
 

@@ -66,28 +66,35 @@ var Config = {
     },
 	getSettings: function(){
 		var settings = {};
-		settings.minPostToDownvote =  this.minPostToDownvote();
-		settings.minDaysToDownvote =  this.minDaysToDownvote();
-		settings.minReputationToDownvote = this.minReputationToDownvote();
-		settings.minPostToUpvote = this.minPostToUpvote();
-		settings.minDaysToUpvote = this.minDaysToUpvote();
-		settings.maxVotesPerUserInThread = this.maxVotesPerUserInThread();
-		settings.maxVotesToSameUserInMonth = this.maxVotesToSameUserInMonth();
+		settings.minPostsToUpvote = MIN_POSTS_TO_UPVOTE;
+		settings.minDaysToUpvote = MIN_DAYS_TO_UPVOTE;
+		settings.minPostsToDownvote = MIN_POSTS_TO_DOWNVOTE;
+		settings.minDaysToDownvote = MIN_DAYS_TO_DOWNVOTE;
+		settings.minReputationToDownvote = MIN_REPUTATION_TO_DOWNVOTE;
+		settings.maxVotesPerUserInThread = MAX_VOTES_PER_USER_AND_THREAD;
+		settings.maxVotesToSameUserInMonth = MAX_VOTES_TO_SAME_USER_PER_MONTH;
+		settings.disabledCategoriesIds = DISABLED_CATEGORIES_IDS;
 		settings.repLogNamespace = REP_LOG_NAMESPACE;
-		settings.disabledCategoriesIds = this.getDisabledCategories();
 		return settings;
 	},
 	setSettings: function(settings){
-		MIN_POSTS_TO_UPVOTE = settings.minPostToDownvote;
-		MIN_DAYS_TO_UPVOTE = settings.minDaysToDownvote =  this.minDaysToDownvote();
-		MIN_POSTS_TO_DOWNVOTE = settings.minReputationToDownvote = this.minReputationToDownvote();
-		MIN_DAYS_TO_DOWNVOTE = settings.minPostToUpvote = this.minPostToUpvote();
-		MIN_REPUTATION_TO_DOWNVOTE = settings.minDaysToUpvote = this.minDaysToUpvote();
-		MAX_VOTES_PER_USER_AND_THREAD = settings.maxVotesPerUserInThread = this.maxVotesPerUserInThread();
-		MAX_VOTES_TO_SAME_USER_PER_MONTH = settings.maxVotesToSameUserInMonth = this.maxVotesToSameUserInMonth();
-		DISABLED_CATEGORIES_IDS = settings.disabledCategoriesIds = this.getDisabledCategories();
+		MIN_POSTS_TO_UPVOTE = settings.minPostsToUpvote;
+		MIN_DAYS_TO_UPVOTE = settings.minDaysToUpvote;
+		MIN_POSTS_TO_DOWNVOTE = settings.minPostsToDownvote;
+		MIN_DAYS_TO_DOWNVOTE = settings.minDaysToDownvote;
+		MIN_REPUTATION_TO_DOWNVOTE = settings.minReputationToDownvote;
+		MAX_VOTES_PER_USER_AND_THREAD = settings.maxVotesPerUserInThread;
+		MAX_VOTES_TO_SAME_USER_PER_MONTH = settings.maxVotesToSameUserInMonth;
+		DISABLED_CATEGORIES_IDS = intArray(settings.disabledCategoriesIds);
 	}
 };
+
+function intArray(arr) {
+	for(var i=0; i<arr.length; i++) {
+		arr[i] = parseInt(arr[i], 10);
+	}
+	return arr;
+}
 
 module.exports = Config;
 
